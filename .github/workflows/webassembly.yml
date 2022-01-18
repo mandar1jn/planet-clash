@@ -27,3 +27,16 @@ jobs:
           cd src
           make PLATFORM=PLATFORM_WEB EMSDK_PATH="D:/a/raylib-game-jam/raylib-game-jam/emsdk-cache/emsdk-main"
           dir
+      - name: copy files
+        run: |
+          cd src
+          mkdir output
+          mv raylib_game.data output
+          mv raylib_game.html output
+          mv raylib_game.js output
+          mv raylib_game.wasm output
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: web
+          path: ./src/output
