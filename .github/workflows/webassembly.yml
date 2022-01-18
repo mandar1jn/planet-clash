@@ -1,0 +1,25 @@
+name: WebAssembly
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    - name: Checkout
+      uses: actions/checkout@master
+  
+    - name: Setup emsdk
+      uses: mymindstorm/setup-emsdk@v11
+      with:
+        version: 3.0.0
+        actions-cache-folder: 'emsdk-cache'
+    
+    steps:
+      - name: build raylib
+        run: |
+          git clone https://github.com/raysan5/raylib 
+          cd raylib/src
+          make PLATFORM=PLATFORM_WEB EMSDK_PATH="D:/a/raylib-game-jam/raylib/emsdk-cache/emsdk-main" RAYLIB_RELEASE_PATH="../build/${{ env.RELEASE_NAME }}/lib" -B
