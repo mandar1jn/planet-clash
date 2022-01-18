@@ -22,6 +22,10 @@ jobs:
           git clone https://github.com/raysan5/raylib 
           cd raylib/src
           make PLATFORM=PLATFORM_WEB EMSDK_PATH="D:/a/raylib-game-jam/raylib-game-jam/emsdk-cache/emsdk-main" -B
+      - name: test
+        run:
+          cd src/../../raylib
+          dir
       - name: build
         run: |
           cd src
