@@ -32,7 +32,7 @@ jobs:
           cd src
           mkdir output
           mv raylib_game.data output
-          mv raylib_game.html output
+          mv raylib_game.html output/index.html
           mv raylib_game.js output
           mv raylib_game.wasm output
       - name: Upload Artifacts
