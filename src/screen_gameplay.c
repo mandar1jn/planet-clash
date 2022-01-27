@@ -24,11 +24,11 @@
 **********************************************************************************************/
 
 #include "raylib.h"
-#include <string.h>
-#include <stdlib.h>
-#include <math.h>
 #include "screens.h"
 #include "planet.h"
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
