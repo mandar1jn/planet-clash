@@ -25,6 +25,7 @@
 
 #include "raylib.h"
 #include "screens.h"
+#include "planet.h"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -36,34 +37,74 @@ static int finishScreen = 0;
 // Gameplay Screen Functions Definition
 //----------------------------------------------------------------------------------
 
+static Planet planets[6] = {
+    {RED, 25, 200, 225, {0,0}, 0, false},
+    {GREEN, 25, 300, 225, {0,0}, 0, false},
+    {BLACK, 25, 400, 225, {0,0}, 0, false},
+    {RED, 25, 500, 225, {0,0}, 0, false},
+    {YELLOW, 25, 600, 225, {0,0}, 0, false},
+    {PURPLE, 25, 700, 225, {0,0}, 0, false},
+};
+
 // Gameplay Screen Initialization logic
 void InitGameplayScreen(void)
 {
-    // TODO: Initialize GAMEPLAY screen variables here!
     framesCounter = 0;
     finishScreen = 0;
 }
 
+bool dragging = false;
+
+
+
 // Gameplay Screen Update logic
 void UpdateGameplayScreen(void)
 {
-    // TODO: Update GAMEPLAY screen variables here!
-
-    // Press enter or tap to change to ENDING screen
-    if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+    
+    for(int i = 0; i < 6; i++)
     {
-        finishScreen = 1;
-        PlaySound(fxCoin);
+        if(!dragging ||planets[i].isBeingDragged)
+        {
+            if (CheckCollisionPointCircle(GetMousePosition(), planets[i].position, planets[i].radius) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                planets[i].isBeingDragged = true;
+                dragging = true;
+            }
+            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+            {
+                planets[i].isBeingDragged = false;
+                dragging = false;
+            }
+
+            if (dragging)
+            {
+                Vector2 tmp = GetMouseDelta();
+                planets[i].position.x += tmp.x;
+                planets[i].position.y += tmp.y;
+            }
+        }
     }
+
+    for(int i = 0; i < 6; i++)
+    {
+        for(int j = i+1; j < 6; j++)
+        {
+            if(CheckCollisionCircles(planets[i].position, planets[i].radius, planets[j].position, planets[j].radius))
+            {
+                finishScreen = 1;
+            }
+        }
+    }
+
 }
 
 // Gameplay Screen Draw logic
 void DrawGameplayScreen(void)
 {
-    // TODO: Draw GAMEPLAY screen here!
-    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), PURPLE);
-    DrawTextEx(font, "GAMEPLAY SCREEN", (Vector2){ 20, 10 }, font.baseSize*3, 4, MAROON);
-    DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
+    for(int i = 0; i < 6; i++)
+    {
+        DrawCircleV(planets[i].position, planets[i].radius, planets[i].color);
+    }
 }
 
 // Gameplay Screen Unload logic

@@ -1,0 +1,10 @@
+#include "raylib.h"
+
+typedef struct Planet {
+    Color color;
+    int radius;
+    Vector2 position;
+    Vector2 direction;
+    int speed;
+    bool isBeingDragged;
+} Planet;
