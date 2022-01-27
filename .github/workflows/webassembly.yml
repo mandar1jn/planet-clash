@@ -21,11 +21,11 @@ jobs:
           cd ..
           git clone https://github.com/raysan5/raylib 
           cd raylib/src
-          make PLATFORM=PLATFORM_WEB EMSDK_PATH="D:/a/raylib-game-jam/raylib-game-jam/emsdk-cache/emsdk-main" -B
+          make PLATFORM=PLATFORM_WEB EMSDK_PATH="D:/a/planet-clash/planet-clash/emsdk-cache/emsdk-main" -B
       - name: build
         run: |
           cd src
-          make PLATFORM=PLATFORM_WEB EMSDK_PATH="D:/a/raylib-game-jam/raylib-game-jam/emsdk-cache/emsdk-main"
+          make PLATFORM=PLATFORM_WEB EMSDK_PATH="D:/a/planet-clash/planet-clash/emsdk-cache/emsdk-main"
           dir
       - name: copy files
         run: |
