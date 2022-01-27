@@ -45,14 +45,12 @@ int minY = 25;
 int maxX = 775;
 int maxY = 425;
 
-static Planet planets[6];
-static Planet defaultPlanets[6] = {
+static Planet planets[4];
+static Planet defaultPlanets[4] = {
     {RED, 25, {25, 25}, {0,0}, 10, false},
     {GREEN, 25, {775, 25}, {0,0}, 7, false},
     {BLACK, 25, {25, 425}, {0,0}, 7, false},
     {RED, 25, {775, 425}, {0,0}, 7, false},
-    {YELLOW, 25, {800/3, 450/2}, {0,0}, 7, false},
-    {PURPLE, 25, {800/3*2, 450/2}, {0,0}, 7, false},
 };
 
 Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistance)
@@ -81,7 +79,7 @@ void InitPlanets()
 {
     memcpy(planets, defaultPlanets, sizeof defaultPlanets);
     
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < 4; i++)
     {
         planets[i].targetPosition.x = RandomInRange(minX, maxX);
         planets[i].targetPosition.y = RandomInRange(minY, maxY);
@@ -89,6 +87,9 @@ void InitPlanets()
 }
 
 bool dragging = false;
+bool isBeingFingerDragged = false;
+int lastX;
+int lastY;
 
 // Gameplay Screen Initialization logic
 void InitGameplayScreen(void)
@@ -109,26 +110,53 @@ void InitGameplayScreen(void)
 void UpdateGameplayScreen(void)
 {
     
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < 4; i++)
     {
-        if(!dragging ||planets[i].isBeingDragged)
+        if(!dragging || planets[i].isBeingDragged)
         {
-            if (CheckCollisionPointCircle(GetMousePosition(), planets[i].position, planets[i].radius) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            if(GetTouchPointCount() > 0)
             {
-                planets[i].isBeingDragged = true;
-                dragging = true;
+                if(CheckCollisionPointCircle((Vector2){GetTouchX(), GetTouchY()}, planets[i].position, planets[i].radius) && !isBeingFingerDragged)
+                {
+                    planets[i].isBeingDragged = true;
+                    dragging = true;
+                    isBeingFingerDragged = true;
+                    lastX = GetTouchX();
+                    lastY = GetTouchY();
+                }
+                if(dragging)
+                {
+                    Vector2 tmp = {GetTouchX() - lastX, GetTouchY() - lastY};
+                    planets[i].position.x += tmp.x;
+                    planets[i].position.y += tmp.y;
+                }
             }
-            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+            else
             {
-                planets[i].isBeingDragged = false;
-                dragging = false;
-            }
+                if(isBeingFingerDragged)
+                {
+                    isBeingFingerDragged = false;
+                    planets[i].isBeingDragged = false;
+                    dragging = false;
+                }
+                
+                if (CheckCollisionPointCircle(GetMousePosition(), planets[i].position, planets[i].radius) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+                {
+                    planets[i].isBeingDragged = true;
+                    dragging = true;
+                }
+                if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+                {
+                    planets[i].isBeingDragged = false;
+                    dragging = false;
+                }
 
-            if (dragging)
-            {
-                Vector2 tmp = GetMouseDelta();
-                planets[i].position.x += tmp.x;
-                planets[i].position.y += tmp.y;
+                if (dragging)
+                {
+                    Vector2 tmp = GetMouseDelta();
+                    planets[i].position.x += tmp.x;
+                    planets[i].position.y += tmp.y;
+                }
             }
         }
         
@@ -144,9 +172,9 @@ void UpdateGameplayScreen(void)
         }
     }
 
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < 4; i++)
     {
-        for(int j = i+1; j < 6; j++)
+        for(int j = i+1; j < 4; j++)
         {
             if(CheckCollisionCircles(planets[i].position, planets[i].radius, planets[j].position, planets[j].radius))
             {
@@ -160,7 +188,7 @@ void UpdateGameplayScreen(void)
 // Gameplay Screen Draw logic
 void DrawGameplayScreen(void)
 {
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < 4; i++)
     {
         DrawCircleV(planets[i].position, planets[i].radius, planets[i].color);
     }
