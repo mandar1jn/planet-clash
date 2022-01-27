@@ -99,6 +99,8 @@ void InitGameplayScreen(void)
     finishScreen = 0;
     
     dragging = false;
+    isBeingFingerDragged = false;
+    initializedFingers = false;
     
     InitPlanets();
 }
@@ -133,6 +135,8 @@ void UpdateGameplayScreen(void)
                     {
                         planets[i].position.x += tmp.x;
                         planets[i].position.y += tmp.y;
+                        lastX = GetTouchX();
+                        lastY = GetTouchY();
                     }
                 }
             }
