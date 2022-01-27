@@ -74,6 +74,8 @@ int main(void)
     // Setup and init first screen
     currentScreen = LOGO;
     InitLogoScreen();
+    
+    srand(time(0));
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(UpdateDrawFrame, 60, 1);

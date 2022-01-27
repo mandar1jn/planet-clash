@@ -24,6 +24,9 @@
 **********************************************************************************************/
 
 #include "raylib.h"
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
 #include "screens.h"
 #include "planet.h"
 
@@ -37,23 +40,68 @@ static int finishScreen = 0;
 // Gameplay Screen Functions Definition
 //----------------------------------------------------------------------------------
 
-static Planet planets[6] = {
-    {RED, 25, 200, 225, {0,0}, 0, false},
-    {GREEN, 25, 300, 225, {0,0}, 0, false},
-    {BLACK, 25, 400, 225, {0,0}, 0, false},
-    {RED, 25, 500, 225, {0,0}, 0, false},
-    {YELLOW, 25, 600, 225, {0,0}, 0, false},
-    {PURPLE, 25, 700, 225, {0,0}, 0, false},
+int minX = 25;
+int minY = 25;
+int maxX = 775;
+int maxY = 425;
+
+static Planet planets[6];
+static Planet defaultPlanets[6] = {
+    {RED, 25, {25, 25}, {0,0}, 10, false},
+    {GREEN, 25, {775, 25}, {0,0}, 7, false},
+    {BLACK, 25, {25, 425}, {0,0}, 7, false},
+    {RED, 25, {775, 425}, {0,0}, 7, false},
+    {YELLOW, 25, {800/3, 450/2}, {0,0}, 7, false},
+    {PURPLE, 25, {800/3*2, 450/2}, {0,0}, 7, false},
 };
+
+Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistance)
+{
+    float xVector = target.x - current.x;
+    float yVector = target.y - current.y;
+    
+    float sqDist = xVector * xVector + yVector * yVector;
+    
+    if (sqDist == 0 || (maxDistance >= 0 && sqDist <= maxDistance * maxDistance))   
+    {
+        return target;
+    }
+    
+    float dist = sqrtf(sqDist);
+    
+    return (Vector2){current.x + xVector / dist * maxDistance, current.y + yVector / dist * maxDistance};
+}
+
+int RandomInRange(int min, int max)
+{
+    return (rand() % (max - min + 1)) + min;
+}
+
+void InitPlanets()
+{
+    memcpy(planets, defaultPlanets, sizeof defaultPlanets);
+    
+    for(int i = 0; i < 6; i++)
+    {
+        planets[i].targetPosition.x = RandomInRange(minX, maxX);
+        planets[i].targetPosition.y = RandomInRange(minY, maxY);
+    }
+}
+
+bool dragging = false;
 
 // Gameplay Screen Initialization logic
 void InitGameplayScreen(void)
 {
     framesCounter = 0;
     finishScreen = 0;
+    
+    dragging = false;
+    
+    InitPlanets();
 }
 
-bool dragging = false;
+
 
 
 
@@ -82,6 +130,17 @@ void UpdateGameplayScreen(void)
                 planets[i].position.x += tmp.x;
                 planets[i].position.y += tmp.y;
             }
+        }
+        
+        if(planets[i].position.x == planets[i].targetPosition.x && planets[i].position.y == planets[i].targetPosition.y)
+        {
+            planets[i].targetPosition.x = RandomInRange(minX, maxX);
+            planets[i].targetPosition.y = RandomInRange(minY, maxY);
+        }
+        
+        if(!planets[i].isBeingDragged)
+        {
+            planets[i].position = MoveTowards(planets[i].position, planets[i].targetPosition, planets[i].speed * GetFrameTime() * 10);
         }
     }
 
