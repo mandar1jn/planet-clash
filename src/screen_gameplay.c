@@ -193,6 +193,7 @@ void DrawGameplayScreen(void)
     {
         DrawCircleV(planets[i].position, planets[i].radius, planets[i].color);
     }
+    DrawCircleV(GetMousePosition(), 25, YELLOW);
 }
 
 // Gameplay Screen Unload logic
