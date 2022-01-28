@@ -134,9 +134,9 @@ void UpdateGameplayScreen(void)
 
                 if (dragging)
                 {
-                    Vector2 tmp = GetMouseDelta();
-                    planets[i].position.x += GetMouseX() - lastX;
-                    planets[i].position.y += GetMouseY() - lastY;
+                    Vector2 tmp = GetMousePosition();
+                    planets[i].position.x += tmp.x - lastX;
+                    planets[i].position.y += tmp.y - lastY;
                     lastX = GetMouseX();
                     lastY = GetMouseY();
                 }
@@ -193,7 +193,6 @@ void DrawGameplayScreen(void)
     {
         DrawCircleV(planets[i].position, planets[i].radius, planets[i].color);
     }
-    DrawCircleV(GetMousePosition(), 25, YELLOW);
 }
 
 // Gameplay Screen Unload logic
