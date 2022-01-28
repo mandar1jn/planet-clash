@@ -159,6 +159,7 @@ void UpdateGameplayScreen(void)
                 {
                     planets[i].isBeingDragged = false;
                     dragging = false;
+                    isBeingFingerDragged = false;
                 }
 
                 if (dragging)
