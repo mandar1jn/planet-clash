@@ -117,38 +117,7 @@ void UpdateGameplayScreen(void)
     {
         if(!dragging || planets[i].isBeingDragged)
         {
-            if(GetTouchPointCount() > 0)
             {
-                if(CheckCollisionPointCircle((Vector2){GetTouchX(), GetTouchY()}, planets[i].position, planets[i].radius) && !isBeingFingerDragged)
-                {
-                    planets[i].isBeingDragged = true;
-                    dragging = true;
-                    isBeingFingerDragged = true;
-                    lastX = GetTouchX();
-                    lastY = GetTouchY();
-                    initializedFingers = true;
-                }
-                if(dragging)
-                {
-                    Vector2 tmp = {GetTouchX() - lastX, GetTouchY() - lastY};
-                    if(initializedFingers)
-                    {
-                        planets[i].position.x += tmp.x;
-                        planets[i].position.y += tmp.y;
-                        lastX = GetTouchX();
-                        lastY = GetTouchY();
-                    }
-                }
-            }
-            else
-            {
-                if(isBeingFingerDragged)
-                {
-                    isBeingFingerDragged = false;
-                    planets[i].isBeingDragged = false;
-                    dragging = false;
-                    initializedFingers = false;
-                }
                 
                 if (CheckCollisionPointCircle(GetMousePosition(), planets[i].position, planets[i].radius) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
                 {
