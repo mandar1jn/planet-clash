@@ -63,8 +63,8 @@ void DrawTitleScreen(void)
 {
     // TODO: Draw TITLE screen here!
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GREEN);
-    DrawTextEx(font, "That was close!", (Vector2){ 20, 10 }, font.baseSize*3, 4, WHITE);
-    DrawTextEx(font, "That was close!", (Vector2){ 20, 5 }, font.baseSize*3, 4, WHITE);
+    DrawTextEx(font, "Planet Clash", (Vector2){ 21, 6 }, font.baseSize*3, 4, BLACK);
+    DrawTextEx(font, "Planet Clash", (Vector2){ 20, 5 }, font.baseSize*3, 4, WHITE);
     DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
 }
 
