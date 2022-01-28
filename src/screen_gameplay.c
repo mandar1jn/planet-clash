@@ -180,6 +180,24 @@ void UpdateGameplayScreen(void)
         {
             planets[i].position = MoveTowards(planets[i].position, planets[i].targetPosition, planets[i].speed * GetFrameTime() * 10);
         }
+        
+        if(planets[i].position.x < 25)
+        {
+            planets[i].position.x = 25;
+        }
+        else if(planets[i].position.x > 775)
+        {
+            planets[i].position.x = 775;
+        }
+        
+        if(planets[i].position.y < 25)
+        {
+            planets[i].position.y = 25;
+        }
+        else if(planets[i].position.y > 425)
+        {
+            planets[i].position.y = 425;
+        }
     }
 
     for(int i = 0; i < 4; i++)
