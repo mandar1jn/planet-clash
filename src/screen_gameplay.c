@@ -121,8 +121,9 @@ void UpdateGameplayScreen(void)
                 {
                     planets[i].isBeingDragged = true;
                     dragging = true;
-                    lastX = GetMouseX();
-                    lastY = GetMouseY();
+                    Vector2 pos = GetMousePosition();
+                    lastX = pos.x;
+                    lastY = pos.y;
                     initializedPositions = true;
                 }
                 if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
@@ -137,8 +138,9 @@ void UpdateGameplayScreen(void)
                     Vector2 tmp = GetMousePosition();
                     planets[i].position.x += tmp.x - lastX;
                     planets[i].position.y += tmp.y - lastY;
-                    lastX = GetMouseX();
-                    lastY = GetMouseY();
+                    Vector2 pos = GetMousePosition();
+                    lastX = pos.x;
+                    lastY = pos.y;
                 }
             }
         }
