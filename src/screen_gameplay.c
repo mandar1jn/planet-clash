@@ -87,8 +87,7 @@ void InitPlanets()
 }
 
 bool dragging = false;
-bool isBeingFingerDragged = false;
-bool initializedFingers = false;
+bool initializedPositions = false;
 int lastX;
 int lastY;
 
@@ -99,8 +98,7 @@ void InitGameplayScreen(void)
     finishScreen = 0;
     
     dragging = false;
-    isBeingFingerDragged = false;
-    initializedFingers = false;
+    initializedPositions = false;
     
     InitPlanets();
 }
@@ -123,19 +121,24 @@ void UpdateGameplayScreen(void)
                 {
                     planets[i].isBeingDragged = true;
                     dragging = true;
+                    lastX = GetMouseX();
+                    lastY = GetMouseY();
+                    initializedPositions = true;
                 }
                 if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
                 {
                     planets[i].isBeingDragged = false;
                     dragging = false;
-                    isBeingFingerDragged = false;
+                    initializedPositions = false;
                 }
 
                 if (dragging)
                 {
                     Vector2 tmp = GetMouseDelta();
-                    planets[i].position.x += tmp.x;
-                    planets[i].position.y += tmp.y;
+                    planets[i].position.x += GetMouseX() - lastX;
+                    planets[i].position.y += GetMouseY() - lastY;
+                    lastX = GetMouseX();
+                    lastY = GetMouseY();
                 }
             }
         }
