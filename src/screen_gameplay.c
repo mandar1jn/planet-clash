@@ -29,6 +29,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -163,6 +164,14 @@ void UpdateGameplayScreen(void)
                     planets[i].position.y += tmp.y - lastY;
                     lastX = tmp.x;
                     lastY = tmp.y;
+                    
+                    char* str = "X pos: ";
+                    sprintf(str, "%f", tmp.x);
+                    TraceLog(LOG_INFO, str);
+                    
+                    str = "Y pos: ";
+                    sprintf(str, "%f", tmp.y);
+                    TraceLog(LOG_INFO, str);
                 }
             }
         }
