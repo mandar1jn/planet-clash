@@ -48,7 +48,7 @@ int maxY = 420;
 
 static Planet planets[4];
 static Planet defaultPlanets[4] = {
-    {RED, 30, {30, 30}, {0,0}, 10, false, 0},
+    {RED, 30, {50, 50}, {0,0}, 10, false, 0},
     {GREEN, 30, {770, 30}, {0,0}, 7, false, 0},
     {BLACK, 30, {30, 420}, {0,0}, 7, false, 0},
     {RED, 30, {770, 420}, {0,0}, 7, false, 0},
