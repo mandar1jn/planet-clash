@@ -49,6 +49,8 @@ void InitGameplayScreen(void)
     SetLevel(0);
     
     InitPlanets();
+    
+    success = false;
 }
 
 // Gameplay Screen Update logic
@@ -62,7 +64,10 @@ void UpdateGameplayScreen(void)
     
     finishScreen = CheckPlanetCollision();
     
-    UpdateTimer();
+    if(finishScreen != 1)
+    {
+        finishScreen = UpdateTimer();
+    }
 }
 
 // Gameplay Screen Draw logic

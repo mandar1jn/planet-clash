@@ -29,6 +29,7 @@
 GameScreen currentScreen = 0;
 Music music = { 0 };
 Sound fxCoin = { 0 };
+bool success = false;
 
 //----------------------------------------------------------------------------------
 // Local Variables Definition (local to this module)
@@ -106,9 +107,9 @@ int main(void)
     }
 
     // Unload global data loaded
-    UnloadFont(font);
     UnloadMusicStream(music);
     UnloadSound(fxCoin);
+    UnloadGameTextures();
 
     CloseAudioDevice();     // Close audio context
 

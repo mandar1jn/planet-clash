@@ -1,6 +1,8 @@
 #include "level.h"
 #include "raylib.h"
 #include "planet.h"
+#include "textures.h"
+#include "screens.h"
 #include <stdio.h>
 
 static double timeLeft = 0;
@@ -16,6 +18,12 @@ char* GetLevelName()
         case 1:
             return "Level 2 - linked planets";
             break;
+        case 2:
+            return "Level 3 - the bigger the beter";
+            break;
+        case 3:
+            return "Level 4 - speedy planets";
+            break;
     }
     return "Could not get name";
 }
@@ -25,22 +33,28 @@ void DrawLevelName()
     DrawText(GetLevelName(), 1, 1, 20, RAYWHITE);
 }
 
-void UpdateTimer()
+int UpdateTimer()
 {
     timeLeft -= GetFrameTime();
     
     if(timeLeft <= 0)
     {
-        levelNumber += 1;
+        if(SetLevel(levelNumber + 1))
+        {
+            return 1;
+        }
         InitPlanets();
     }
+    
+    return 0;
 }
 
 void DrawTimer()
 {
+    DrawTexture(GetTimer(), 0, 20, WHITE);
     char str[5];
     snprintf(str, 5, "%f", timeLeft);
-    DrawText(str, 0, 50, 20, RAYWHITE);
+    DrawText(str, 32, 28, 20, RAYWHITE);
 }
 
 void SetTimer(double time)
@@ -48,9 +62,15 @@ void SetTimer(double time)
     timeLeft = time;
 }
 
-void SetLevel(int level)
+int SetLevel(int level)
 {
     levelNumber = level;
+    if(level >= 4)
+    {
+        success = true;
+        return 1;
+    }
+    return 0;
 }
 
 int GetLevelNumber()

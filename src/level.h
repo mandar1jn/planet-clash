@@ -2,12 +2,12 @@ char* GetLevelName();
 
 void DrawLevelName();
 
-void UpdateTimer();
+int UpdateTimer();
 
 void DrawTimer();
 
 void SetTimer(double time);
 
-void SetLevel(int level);
+int SetLevel(int level);
 
 int GetLevelNumber();

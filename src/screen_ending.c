@@ -62,8 +62,16 @@ void UpdateEndingScreen(void)
 void DrawEndingScreen(void)
 {
     DrawBackground();
-    DrawText("ENDING SCREEN", 20, 10, GetFontDefault().baseSize*3, DARKBLUE);
-    DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, DARKBLUE);
+    if(!success)
+    {
+        DrawText("YOU LOSE", (800/2) - (MeasureText("YOU LOSE", GetFontDefault().baseSize*3*2) / 2), 200, GetFontDefault().baseSize*3*2, RED);
+        DrawText("CLICK or TAP to RETURN to TITLE SCREEN", (800/2) - (MeasureText("CLICK or TAP to RETURN to TITLE SCREEN", 20) / 2), 275, 20, RED);
+    }
+    else
+    {
+        DrawText("YOU WIN", (800/2) - (MeasureText("YOU WIN", GetFontDefault().baseSize*3*2) / 2), 200, GetFontDefault().baseSize*3 * 2, GREEN);
+        DrawText("CLICK or TAP to RETURN to TITLE SCREEN", (800/2) - (MeasureText("CLICK or TAP to RETURN to TITLE SCREEN", 20) / 2), 275, 20, GREEN);
+    }
 }
 
 // Ending Screen Unload logic

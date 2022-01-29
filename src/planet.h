@@ -28,3 +28,7 @@ void HandlePlanetMovementLevel2();
 void InitializeLevel1();
 
 void InitializeLevel2();
+
+void InitializeLevel3();
+
+void InitializeLevel4();

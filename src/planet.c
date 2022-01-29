@@ -6,16 +6,11 @@
 
 static Planet planets[4];
 static Planet defaultPlanets[4] = {
-    {30, {30, 30}, {0,0}, 10, false, 0},
+    {30, {30, 30}, {0,0}, 7, false, 0},
     {30, {770, 30}, {0,0}, 7, false, 0},
     {30, {770, 420}, {0,0}, 7, false, 0},
     {30, {30, 420}, {0,0}, 7, false, 0},
 };
-
-static int minX = 30;
-static int minY = 30;
-static int maxX = 770;
-static int maxY = 420;
 
 bool dragging = false;
 bool initializedPositions = false;
@@ -26,22 +21,22 @@ void ClampPlanetPositions()
 {
     for(int i = 0; i < 4; i++)
     {
-        if(planets[i].position.x < minX)
+        if(planets[i].position.x < planets[i].radius)
         {
-            planets[i].position.x = minX;
+            planets[i].position.x = planets[i].radius;
         }
-        else if(planets[i].position.x > maxX)
+        else if(planets[i].position.x > 800 - planets[i].radius)
         {
-            planets[i].position.x = maxX;
+            planets[i].position.x = 800 - planets[i].radius;
         }
         
-        if(planets[i].position.y < minY)
+        if(planets[i].position.y < planets[i].radius)
         {
-            planets[i].position.y = minY;
+            planets[i].position.y = planets[i].radius;
         }
-        else if(planets[i].position.y > maxY)
+        else if(planets[i].position.y > 450 - planets[i].radius)
         {
-            planets[i].position.y = maxY;
+            planets[i].position.y = 450 - planets[i].radius;
         }
     }
 }
@@ -50,7 +45,7 @@ void DrawPlanets()
 {
     for(int i = 0; i < 4; i++)
     {
-        DrawTexturePro(GetPlanetTexture(planets[i].textureID), (Rectangle){0, 0, 32, 32}, (Rectangle){0, 0, 60, 60}, (Vector2){-planets[i].position.x + 30, -planets[i].position.y + 30}, 0, WHITE);
+        DrawTexturePro(GetPlanetTexture(planets[i].textureID), (Rectangle){0, 0, 32, 32}, (Rectangle){0, 0, planets[i].radius * 2, planets[i].radius * 2}, (Vector2){-planets[i].position.x + planets[i].radius, -planets[i].position.y + planets[i].radius}, 0, WHITE);
     }
 }
 
@@ -60,7 +55,7 @@ void InitPlanets()
     
     for(int i = 0; i < 4; i++)
     {
-        planets[i].textureID = RandomInRange(0, 9);
+        planets[i].textureID = RandomInRange(0, 16);
     }
     
     dragging = false;
@@ -73,6 +68,12 @@ void InitPlanets()
             break;
         case 1:
             InitializeLevel2();
+            break;
+        case 2:
+            InitializeLevel3();
+            break;
+        case 3:
+            InitializeLevel4();
             break;
     }
 }
@@ -138,6 +139,11 @@ void HandlePlanetMovement()
         case 1:
             HandlePlanetMovementLevel2();
             break;
+        case 2:
+            HandlePlanetMovementLevel1();
+            break;
+        case 3:
+            HandlePlanetMovementLevel1();
     }
 }
 
@@ -147,8 +153,8 @@ void HandlePlanetMovementLevel1()
     {
         if(planets[i].position.x == planets[i].targetPosition.x && planets[i].position.y == planets[i].targetPosition.y)
         {
-            planets[i].targetPosition.x = RandomInRange(minX, maxX);
-            planets[i].targetPosition.y = RandomInRange(minY, maxY);
+            planets[i].targetPosition.x = RandomInRange(planets[i].radius, 800 - planets[i].radius);
+            planets[i].targetPosition.y = RandomInRange(planets[i].radius, 450 - planets[i].radius);
         }
         
         if(!planets[i].isBeingDragged)
@@ -177,17 +183,43 @@ void InitializeLevel1()
     
     for(int i = 0; i < 4; i++)
     {
-        planets[i].targetPosition.x = RandomInRange(minX, maxX);
-        planets[i].targetPosition.y = RandomInRange(minY, maxY);
+        planets[i].targetPosition.x = RandomInRange(planets[i].radius, 800 - planets[i].radius);
+        planets[i].targetPosition.y = RandomInRange(planets[i].radius, 450 - planets[i].radius);
     }
 }
 
 void InitializeLevel2()
 {
-    SetTimer(40);
+    SetTimer(10);
     
     for(int i = 0; i < 4; i++)
     {
         planets[i].targetPosition = planets[ClampWithOverflow(i + 2, 0, 3)].position;
+    }
+}
+
+void InitializeLevel3()
+{
+    SetTimer(15);
+    
+    for(int i = 0; i < 4; i++)
+    {
+        planets[i].radius = 50;
+        planets[i].targetPosition.x = RandomInRange(planets[i].radius, 800 - planets[i].radius);
+        planets[i].targetPosition.y = RandomInRange(planets[i].radius, 450 - planets[i].radius);
+        planets[i].speed = 4;
+    }
+}
+
+void InitializeLevel4()
+{
+    SetTimer(15);
+    
+    for(int i = 0; i < 4; i++)
+    {
+        planets[i].radius = 20;
+        planets[i].targetPosition.x = RandomInRange(planets[i].radius, 800 - planets[i].radius);
+        planets[i].targetPosition.y = RandomInRange(planets[i].radius, 450 - planets[i].radius);
+        planets[i].speed = 13;
     }
 }
