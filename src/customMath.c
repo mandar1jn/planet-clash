@@ -33,7 +33,7 @@ int ClampWithOverflow(int orig, int min, int max)
     
     while(orig > max)
     {
-        orig -= max;
+        orig -= max + 1;
     }
     
     return orig;

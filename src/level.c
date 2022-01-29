@@ -8,6 +8,9 @@ char* GetLevelName()
         case 0:
             return "Level 1 - random movement";
             break;
+        case 1:
+            return "Level 2 - linked planets";
+            break;
     }
     return "Could not get name";
 }

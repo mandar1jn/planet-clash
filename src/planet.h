@@ -9,7 +9,7 @@ typedef struct Planet {
     int textureID;
 } Planet;
 
-void ClampPlanetPosition(int index);
+void ClampPlanetPositions();
 
 void DrawPlanets();
 
@@ -18,3 +18,13 @@ void InitPlanets();
 void HandlePlanetDragging();
 
 int CheckPlanetCollision();
+
+void HandlePlanetMovement();
+
+void HandlePlanetMovementLevel1();
+
+void HandlePlanetMovementLevel2();
+
+void InitializeLevel1();
+
+void InitializeLevel2();

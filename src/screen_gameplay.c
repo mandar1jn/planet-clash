@@ -47,13 +47,17 @@ void InitGameplayScreen(void)
     
     InitPlanets();
     
-    levelNumber = 0;
+    levelNumber = 1;
 }
 
 // Gameplay Screen Update logic
 void UpdateGameplayScreen(void)
 {
     HandlePlanetDragging();
+    
+    HandlePlanetMovement();
+    
+    ClampPlanetPositions();
     
     finishScreen = CheckPlanetCollision();
 }
@@ -63,7 +67,7 @@ void DrawGameplayScreen(void)
 {
     DrawPlanets();
     
-    //DrawLevelName();
+    DrawLevelName();
 }
 
 // Gameplay Screen Unload logic
