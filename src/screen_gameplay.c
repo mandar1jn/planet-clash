@@ -48,10 +48,10 @@ int maxY = 420;
 
 static Planet planets[4];
 static Planet defaultPlanets[4] = {
-    {RED, 30, {50, 50}, {0,0}, 10, false, 0},
-    {GREEN, 30, {770, 30}, {0,0}, 7, false, 0},
-    {BLACK, 30, {30, 420}, {0,0}, 7, false, 0},
-    {RED, 30, {770, 420}, {0,0}, 7, false, 0},
+    {30, {50, 50}, {0,0}, 10, false, 0},
+    {30, {770, 30}, {0,0}, 7, false, 0},
+    {30, {30, 420}, {0,0}, 7, false, 0},
+    {30, {770, 420}, {0,0}, 7, false, 0},
 };
 
 Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistance)
@@ -215,7 +215,6 @@ void DrawGameplayScreen(void)
 {
     for(int i = 0; i < 4; i++)
     {
-        DrawCircleV(planets[i].position, planets[i].radius, planets[i].color);
         DrawTexturePro(planetTextures[planets[i].textureID], (Rectangle){0, 0, 32, 32}, (Rectangle){0, 0, 60, 60}, (Vector2){-planets[i].position.x + 30, -planets[i].position.y + 30}, 0, WHITE);
     }
 }
