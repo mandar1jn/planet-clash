@@ -96,31 +96,28 @@ void UpdateGameplayScreen(void)
     {
         if(!dragging || planets[i].isBeingDragged)
         {
+            if (CheckCollisionPointCircle(GetMousePosition(), planets[i].position, planets[i].radius) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
-                
-                if (CheckCollisionPointCircle(GetMousePosition(), planets[i].position, planets[i].radius) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-                {
-                    planets[i].isBeingDragged = true;
-                    dragging = true;
-                    Vector2 pos = GetMousePosition();
-                    lastX = pos.x;
-                    lastY = pos.y;
-                }
-                if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
-                {
-                    planets[i].isBeingDragged = false;
-                    dragging = false;
-                }
+                planets[i].isBeingDragged = true;
+                dragging = true;
+                Vector2 pos = GetMousePosition();
+                lastX = pos.x;
+                lastY = pos.y;
+            }
+            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+            {
+                planets[i].isBeingDragged = false;
+                dragging = false;
+            }
 
-                if (dragging)
-                {
-                    Vector2 tmp = GetMousePosition();
-                    planets[i].position.x += tmp.x - lastX;
-                    planets[i].position.y += tmp.y - lastY;
-                    
-                    lastX = tmp.x;
-                    lastY = tmp.y;
-                }
+            if (dragging)
+            {
+                Vector2 tmp = GetMousePosition();
+                planets[i].position.x += tmp.x - lastX;
+                planets[i].position.y += tmp.y - lastY;
+                
+                lastX = tmp.x;
+                lastY = tmp.y;
             }
         }
         
