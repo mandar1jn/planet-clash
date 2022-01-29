@@ -75,6 +75,12 @@ void InitPlanets()
         case 3:
             InitializeLevel4();
             break;
+        case 4:
+            InitializeLevel5();
+            break;
+        case 5:
+            InitializeLevel6();
+            break;
     }
 }
 
@@ -144,6 +150,13 @@ void HandlePlanetMovement()
             break;
         case 3:
             HandlePlanetMovementLevel1();
+            break;
+        case 4:
+            HandlePlanetMovementLevel1();
+            break;
+        case 5:
+            HandlePlanetMovementLevel2();
+            break;
     }
 }
 
@@ -220,6 +233,46 @@ void InitializeLevel4()
         planets[i].radius = 20;
         planets[i].targetPosition.x = RandomInRange(planets[i].radius, 800 - planets[i].radius);
         planets[i].targetPosition.y = RandomInRange(planets[i].radius, 450 - planets[i].radius);
+        planets[i].speed = 10;
+    }
+}
+
+void InitializeLevel5()
+{
+    SetTimer(15);
+    
+    for(int i = 0; i < 2; i++)
+    {
+        planets[i].radius = 20;
+        planets[i].targetPosition.x = RandomInRange(planets[i].radius, 800 - planets[i].radius);
+        planets[i].targetPosition.y = RandomInRange(planets[i].radius, 450 - planets[i].radius);
         planets[i].speed = 13;
+    }
+    
+    for(int i = 2; i < 4; i++)
+    {
+        planets[i].radius = 50;
+        planets[i].targetPosition.x = RandomInRange(planets[i].radius, 800 - planets[i].radius);
+        planets[i].targetPosition.y = RandomInRange(planets[i].radius, 450 - planets[i].radius);
+        planets[i].speed = 4;
+    }
+}
+
+void InitializeLevel6()
+{
+    SetTimer(15);
+    
+    for(int i = 0; i < 2; i++)
+    {
+        planets[i].radius = 50;
+        planets[i].targetPosition = planets[ClampWithOverflow(i + 2, 0, 3)].position;
+        planets[i].speed = 4;
+    }
+    
+    for(int i = 2; i < 4; i++)
+    {
+        planets[i].radius = 20;
+        planets[i].targetPosition = planets[ClampWithOverflow(i + 2, 0, 3)].position;
+        planets[i].speed = 10;
     }
 }

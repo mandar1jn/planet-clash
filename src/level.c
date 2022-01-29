@@ -24,6 +24,12 @@ char* GetLevelName()
         case 3:
             return "Level 4 - speedy planets";
             break;
+        case 4:
+            return "Level 5 - balanced, as all things should be";
+            break;
+        case 5:
+            return "Level 6 - linked contrast";
+            break;
     }
     return "Could not get name";
 }
@@ -65,7 +71,7 @@ void SetTimer(double time)
 int SetLevel(int level)
 {
     levelNumber = level;
-    if(level >= 4)
+    if(level >= 6)
     {
         success = true;
         return 1;

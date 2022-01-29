@@ -32,3 +32,7 @@ void InitializeLevel2();
 void InitializeLevel3();
 
 void InitializeLevel4();
+
+void InitializeLevel5();
+
+void InitializeLevel6();
