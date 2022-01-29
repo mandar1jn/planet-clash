@@ -148,13 +148,11 @@ void UpdateGameplayScreen(void)
                     Vector2 pos = GetMousePosition();
                     lastX = pos.x;
                     lastY = pos.y;
-                    initializedPositions = true;
                 }
                 if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
                 {
                     planets[i].isBeingDragged = false;
                     dragging = false;
-                    initializedPositions = false;
                 }
 
                 if (dragging)
@@ -162,19 +160,6 @@ void UpdateGameplayScreen(void)
                     Vector2 tmp = GetMousePosition();
                     planets[i].position.x += tmp.x - lastX;
                     planets[i].position.y += tmp.y - lastY;
-                    
-                    char* str = "";
-                    sprintf(str, "X pos: %f", tmp.x);
-                    TraceLog(LOG_INFO, str);
-                    
-                    sprintf(str, "Y pos: %f", tmp.y);
-                    TraceLog(LOG_INFO, str);
-                    
-                    sprintf(str, "last X pos: %f", lastX);
-                    TraceLog(LOG_INFO, str);
-                    
-                    sprintf(str, "last Y pos: %f", lastY);
-                    TraceLog(LOG_INFO, str);
                     
                     lastX = tmp.x;
                     lastY = tmp.y;
