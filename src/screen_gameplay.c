@@ -26,10 +26,8 @@
 #include "raylib.h"
 #include "screens.h"
 #include "planet.h"
+#include "customMath.h"
 #include <string.h>
-#include <math.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -53,28 +51,6 @@ static Planet defaultPlanets[4] = {
     {30, {30, 420}, {0,0}, 7, false, 0},
     {30, {770, 420}, {0,0}, 7, false, 0},
 };
-
-Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistance)
-{
-    float xVector = target.x - current.x;
-    float yVector = target.y - current.y;
-    
-    float sqDist = xVector * xVector + yVector * yVector;
-    
-    if (sqDist == 0 || (maxDistance >= 0 && sqDist <= maxDistance * maxDistance))   
-    {
-        return target;
-    }
-    
-    float dist = sqrtf(sqDist);
-    
-    return (Vector2){current.x + xVector / dist * maxDistance, current.y + yVector / dist * maxDistance};
-}
-
-int RandomInRange(int min, int max)
-{
-    return (rand() % (max - min + 1)) + min;
-}
 
 void InitPlanets();
 
