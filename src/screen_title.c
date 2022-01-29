@@ -25,6 +25,7 @@
 
 #include "raylib.h"
 #include "screens.h"
+#include "textures.h"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -62,10 +63,10 @@ void UpdateTitleScreen(void)
 void DrawTitleScreen(void)
 {
     // TODO: Draw TITLE screen here!
-    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), GREEN);
-    DrawTextEx(font, "Planet Clash", (Vector2){ 21, 6 }, font.baseSize*3, 4, BLACK);
-    DrawTextEx(font, "Planet Clash", (Vector2){ 20, 5 }, font.baseSize*3, 4, WHITE);
-    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
+    DrawBackground();
+    Texture2D logo = GetLogo();
+    DrawTexture(logo, (800/2) - (logo.width / 2), (450/2) - (logo.height / 2) - 20, WHITE);
+    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 375, 20, GRAY);
 }
 
 // Title Screen Unload logic

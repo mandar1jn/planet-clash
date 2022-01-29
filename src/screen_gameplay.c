@@ -28,6 +28,7 @@
 #include "planet.h"
 #include "customMath.h"
 #include "level.h"
+#include "textures.h"
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
@@ -47,7 +48,7 @@ void InitGameplayScreen(void)
     
     InitPlanets();
     
-    levelNumber = 1;
+    levelNumber = 0;
 }
 
 // Gameplay Screen Update logic
@@ -65,6 +66,8 @@ void UpdateGameplayScreen(void)
 // Gameplay Screen Draw logic
 void DrawGameplayScreen(void)
 {
+    DrawBackground();
+    
     DrawPlanets();
     
     DrawLevelName();

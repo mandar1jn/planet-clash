@@ -17,5 +17,5 @@ char* GetLevelName()
 
 void DrawLevelName()
 {
-    DrawText(GetLevelName(), 1, 1, 20, BLACK);
+    DrawText(GetLevelName(), 1, 1, 20, RAYWHITE);
 }

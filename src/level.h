@@ -1,4 +1,4 @@
-static int levelNumber = 1;
+static int levelNumber = 0;
 
 char* GetLevelName();
 
