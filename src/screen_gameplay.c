@@ -40,17 +40,17 @@ static int finishScreen = 0;
 // Gameplay Screen Functions Definition
 //----------------------------------------------------------------------------------
 
-int minX = 25;
-int minY = 25;
-int maxX = 775;
-int maxY = 425;
+int minX = 30;
+int minY = 30;
+int maxX = 770;
+int maxY = 420;
 
 static Planet planets[4];
 static Planet defaultPlanets[4] = {
-    {RED, 30, {25, 25}, {0,0}, 10, false, NULL},
-    {GREEN, 30, {775, 25}, {0,0}, 7, false, NULL},
-    {BLACK, 30, {25, 425}, {0,0}, 7, false, NULL},
-    {RED, 30, {775, 425}, {0,0}, 7, false, NULL},
+    {RED, 30, {30, 30}, {0,0}, 10, false, 0},
+    {GREEN, 30, {770, 30}, {0,0}, 7, false, 0},
+    {BLACK, 30, {30, 420}, {0,0}, 7, false, 0},
+    {RED, 30, {770, 420}, {0,0}, 7, false, 0},
 };
 
 Vector2 MoveTowards(Vector2 current, Vector2 target, float maxDistance)
@@ -84,8 +84,6 @@ int lastY;
 
 double startTime;
 
-static int baseTakenPlanets = {9, 9, 9, 9, 9, 9, 9};
-static int takenPlanets[8] = {9, 9, 9, 9, 9, 9, 9};
 static Texture2D planetTextures[8];
 
 char* texturePaths[8] = {
@@ -112,7 +110,6 @@ void InitGameplayScreen(void)
     
     startTime = GetTime();
     
-    memcpy(takenPlanets, baseTakenPlanets, sizeof baseTakenPlanets);
     
     for(int i = 0; i < 8; i++)
     {
@@ -128,8 +125,7 @@ void InitPlanets()
     {
         planets[i].targetPosition.x = RandomInRange(minX, maxX);
         planets[i].targetPosition.y = RandomInRange(minY, maxY);
-        int textureIndex = RandomInRange(0, 7);
-        planets[i].texture = planetTextures[textureIndex];
+        planets[i].textureID = RandomInRange(0, 7);
     }
 }
 
@@ -183,22 +179,22 @@ void UpdateGameplayScreen(void)
             planets[i].position = MoveTowards(planets[i].position, planets[i].targetPosition, planets[i].speed * GetFrameTime() * 10);
         }
         
-        if(planets[i].position.x < 25)
+        if(planets[i].position.x < 30)
         {
-            planets[i].position.x = 25;
+            planets[i].position.x = 30;
         }
-        else if(planets[i].position.x > 775)
+        else if(planets[i].position.x > 770)
         {
-            planets[i].position.x = 775;
+            planets[i].position.x = 770;
         }
         
-        if(planets[i].position.y < 25)
+        if(planets[i].position.y < 30)
         {
-            planets[i].position.y = 25;
+            planets[i].position.y = 30;
         }
-        else if(planets[i].position.y > 425)
+        else if(planets[i].position.y > 420)
         {
-            planets[i].position.y = 425;
+            planets[i].position.y = 420;
         }
     }
 
@@ -221,7 +217,7 @@ void DrawGameplayScreen(void)
     for(int i = 0; i < 4; i++)
     {
         DrawCircleV(planets[i].position, planets[i].radius, planets[i].color);
-        DrawTexturePro(planets[i].texture, (Rectangle){0, 0, 32, 32}, (Rectangle){0, 0, 60, 60}, (Vector2){-planets[i].position.x + 30, -planets[i].position.y + 30}, 0, WHITE);
+        DrawTexturePro(planetTextures[planets[i].textureID], (Rectangle){0, 0, 32, 32}, (Rectangle){0, 0, 60, 60}, (Vector2){-planets[i].position.x + 30, -planets[i].position.y + 30}, 0, WHITE);
     }
 }
 

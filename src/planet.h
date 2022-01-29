@@ -7,5 +7,5 @@ typedef struct Planet {
     Vector2 targetPosition;
     int speed;
     bool isBeingDragged;
-    Texture2D texture;
+    int textureID;
 } Planet;
