@@ -66,8 +66,8 @@ void DrawTitleScreen(void)
     Texture2D logo = GetLogo();
     DrawTexture(logo, (800/2) - (logo.width / 2), (450/2) - (logo.height / 2) - 20, WHITE);
     DrawText("CLICK or TAP to GAMEPLAY SCREEN", (800 / 2) - (MeasureText("CLICK or TAP to GAMEPLAY SCREEN", 20) / 2), 350, 20, GRAY);
-    DrawText("Code by Marijn Kneppers", (800 / 2) - (MeasureText("Code by Marijn Kneppers", 20) / 2), 375, 20, GRAY);
-    DrawText("Art by Twan Kneppers", (800 / 2) - (MeasureText("Art by Twan Kneppers", 20) / 2), 400, 20, GRAY);
+    DrawText("Code by Mandar1jn", (800 / 2) - (MeasureText("Code by Marijn Kneppers", 20) / 2), 375, 20, GRAY);
+    DrawText("Art by Twan_Soul", (800 / 2) - (MeasureText("Art by Twan Kneppers", 20) / 2), 400, 20, GRAY);
 }
 
 // Title Screen Unload logic
