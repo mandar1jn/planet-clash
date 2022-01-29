@@ -62,7 +62,7 @@ void UpdateEndingScreen(void)
 void DrawEndingScreen(void)
 {
     DrawBackground();
-    DrawTextEx(font, "ENDING SCREEN", (Vector2){ 20, 10 }, font.baseSize*3, 4, DARKBLUE);
+    DrawText("ENDING SCREEN", 20, 10, GetFontDefault().baseSize*3, DARKBLUE);
     DrawText("PRESS ENTER or TAP to RETURN to TITLE SCREEN", 120, 220, 20, DARKBLUE);
 }
 
