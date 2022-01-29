@@ -25,7 +25,7 @@ char* GetLevelName()
             return "Level 4 - speedy planets";
             break;
         case 4:
-            return "Level 5 - balanced, as all things should be";
+            return "Level 5 - perfectly balanced, as all things should be";
             break;
         case 5:
             return "Level 6 - linked contrast";
