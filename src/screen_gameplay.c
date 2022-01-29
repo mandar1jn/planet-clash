@@ -46,9 +46,9 @@ void InitGameplayScreen(void)
     framesCounter = 0;
     finishScreen = 0;
     
-    InitPlanets();
+    SetLevel(0);
     
-    levelNumber = 0;
+    InitPlanets();
 }
 
 // Gameplay Screen Update logic
@@ -61,6 +61,8 @@ void UpdateGameplayScreen(void)
     ClampPlanetPositions();
     
     finishScreen = CheckPlanetCollision();
+    
+    UpdateTimer();
 }
 
 // Gameplay Screen Draw logic
@@ -71,6 +73,8 @@ void DrawGameplayScreen(void)
     DrawPlanets();
     
     DrawLevelName();
+    
+    DrawTimer();
 }
 
 // Gameplay Screen Unload logic

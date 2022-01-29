@@ -66,7 +66,7 @@ void InitPlanets()
     dragging = false;
     initializedPositions = false;
     
-    switch(levelNumber)
+    switch(GetLevelNumber())
     {
         case 0:
             InitializeLevel1();
@@ -130,7 +130,7 @@ int CheckPlanetCollision()
 
 void HandlePlanetMovement()
 {
-    switch(levelNumber)
+    switch(GetLevelNumber())
     {
         case 0:
             HandlePlanetMovementLevel1();
@@ -173,6 +173,8 @@ void HandlePlanetMovementLevel2()
 
 void InitializeLevel1()
 {
+    SetTimer(15);
+    
     for(int i = 0; i < 4; i++)
     {
         planets[i].targetPosition.x = RandomInRange(minX, maxX);
@@ -182,6 +184,8 @@ void InitializeLevel1()
 
 void InitializeLevel2()
 {
+    SetTimer(40);
+    
     for(int i = 0; i < 4; i++)
     {
         planets[i].targetPosition = planets[ClampWithOverflow(i + 2, 0, 3)].position;
