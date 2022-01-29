@@ -27,6 +27,8 @@
 #include "screens.h"
 #include "planet.h"
 #include "customMath.h"
+#include "textures.h"
+#include "level.h"
 #include <string.h>
 
 //----------------------------------------------------------------------------------
@@ -59,21 +61,6 @@ bool initializedPositions = false;
 float lastX;
 float lastY;
 
-double startTime;
-
-static Texture2D planetTextures[8];
-
-char* texturePaths[8] = {
-    "./resources/Earth.png",
-    "./resources/Jupiter.png",
-    "./resources/Mars.png",
-    "./resources/Mercury.png",
-    "./resources/Neptune.png",
-    "./resources/Saturn.png",
-    "./resources/Uranus.png",
-    "./resources/Venus.png",
-};
-
 // Gameplay Screen Initialization logic
 void InitGameplayScreen(void)
 {
@@ -85,13 +72,7 @@ void InitGameplayScreen(void)
     
     InitPlanets();
     
-    startTime = GetTime();
-    
-    
-    for(int i = 0; i < 8; i++)
-    {
-        planetTextures[i] = LoadTexture(texturePaths[i]);
-    }
+    levelNumber = 0;
 }
 
 void InitPlanets()
@@ -193,6 +174,8 @@ void DrawGameplayScreen(void)
     {
         DrawTexturePro(planetTextures[planets[i].textureID], (Rectangle){0, 0, 32, 32}, (Rectangle){0, 0, 60, 60}, (Vector2){-planets[i].position.x + 30, -planets[i].position.y + 30}, 0, WHITE);
     }
+    
+    DrawText(GetLevelName(), 1, 1, 20, BLACK);
 }
 
 // Gameplay Screen Unload logic

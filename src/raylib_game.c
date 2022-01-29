@@ -69,6 +69,8 @@ int main(void)
     font = LoadFont("resources/mecha.png");
     music = LoadMusicStream("resources/ambient.ogg");
     fxCoin = LoadSound("resources/coin.wav");
+    
+    InitGameTextures();
 
     SetMusicVolume(music, 1.0f);
     PlayMusicStream(music);
