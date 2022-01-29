@@ -161,9 +161,8 @@ void UpdateGameplayScreen(void)
                     Vector2 tmp = GetMousePosition();
                     planets[i].position.x += tmp.x - lastX;
                     planets[i].position.y += tmp.y - lastY;
-                    Vector2 pos = GetMousePosition();
-                    lastX = pos.x;
-                    lastY = pos.y;
+                    lastX = tmp.x;
+                    lastY = tmp.y;
                 }
             }
         }
