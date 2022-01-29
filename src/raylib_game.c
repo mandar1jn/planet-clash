@@ -14,6 +14,7 @@
 
 #include "raylib.h"
 #include "screens.h"    // NOTE: Declares global (extern) variables and screens functions
+#include "textures.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -70,7 +71,7 @@ int main(void)
     music = LoadMusicStream("resources/ambient.ogg");
     fxCoin = LoadSound("resources/coin.wav");
     
-    InitGameTextures();
+    LoadGameTextures();
 
     SetMusicVolume(music, 1.0f);
     PlayMusicStream(music);

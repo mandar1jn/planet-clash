@@ -8,3 +8,13 @@ typedef struct Planet {
     bool isBeingDragged;
     int textureID;
 } Planet;
+
+void ClampPlanetPosition(int index);
+
+void DrawPlanets();
+
+void InitPlanets();
+
+void HandlePlanetDragging();
+
+int CheckPlanetCollision();
