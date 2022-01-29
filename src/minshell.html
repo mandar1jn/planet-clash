@@ -30,8 +30,41 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="https://www.raylib.com/favicon.ico">
     
-    <style>
-        body{margin:0}canvas.emscripten{border:0 none;background-color:#000;margin: 0;position: absolute;top: 50%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);}
+     <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: black;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas.emscripten { 
+            display: block;
+            image-rendering: pixelated;
+        }
+        @media (min-aspect-ratio: 800/450) {
+            canvas.emscripten {
+                height: 100vh;
+                width: auto;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        @media (max-aspect-ratio: 800/450)
+        {
+            canvas.emscripten {
+                width: 100vw;
+                height: auto;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+        }
     </style>
     <script type='text/javascript' src="https://cdn.jsdelivr.net/gh/eligrey/FileSaver.js/dist/FileSaver.min.js"> </script>
     <script type='text/javascript'>
