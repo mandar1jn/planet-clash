@@ -1,12 +1,12 @@
 #include "textures.h"
 
-static Texture2D planetTextures[8];
+static Texture2D planetTextures[10];
 
 static Texture2D background;
 
 static Texture2D logo;
 
-static char* texturePaths[8] = {
+static char* texturePaths[10] = {
     "./resources/Earth.png",
     "./resources/Jupiter.png",
     "./resources/Mars.png",
@@ -15,11 +15,13 @@ static char* texturePaths[8] = {
     "./resources/Saturn.png",
     "./resources/Uranus.png",
     "./resources/Venus.png",
+    "./resources/Blue planet1.png",
+    "./resources/orange planet1.png"
 };
 
 void LoadGameTextures()
 {
-    for(int i = 0; i < 8; i++)
+    for(int i = 0; i < 10; i++)
     {
         planetTextures[i] = LoadTexture(texturePaths[i]);
     }

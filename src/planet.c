@@ -60,7 +60,7 @@ void InitPlanets()
     
     for(int i = 0; i < 4; i++)
     {
-        planets[i].textureID = RandomInRange(0, 7);
+        planets[i].textureID = RandomInRange(0, 9);
     }
     
     dragging = false;
